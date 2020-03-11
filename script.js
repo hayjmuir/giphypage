@@ -23,10 +23,10 @@ function renderGif(gifInput){
             var gifs = $("<img>");
 
             gifs.attr("src", results[i].images.fixed_height_still.url);
-            gifs.attr("still", results[i].images.fixed_height_still.url)
-            gifs.attr("animate", results[i].images.fixed_height.url)
+            gifs.attr("data-still", results[i].images.fixed_height_still.url)
+            gifs.attr("data-animate", results[i].images.fixed_height.url)
             gifs.addClass("gif")
-            gifs.attr("state" , "still")
+            gifs.attr("data-state" , "still")
             gifDiv.prepend(p);
             gifDiv.prepend(gifs)
             $("#images").prepend(gifDiv);
@@ -70,16 +70,16 @@ $("#btnStorage").empty();
 };
 
 
-$(".gif").on("click" , function(){
+$(document).on("click", ".gif", function(){
 
-var state = $(this).attr("state");
+var state = $(this).attr("data-state");
 
 if(state === "still"){
-    $(this).attr("src" , $(this).attr("animate"));
-    $(this).attr("state", "animate");
+    $(this).attr("src" , $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
 }   else {
-    $(this).attr("src" , $(this).attr("still"));
-    $(this).attr("state", "still");
+    $(this).attr("src" , $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
 }
 
 });
